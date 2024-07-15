@@ -1,13 +1,13 @@
 package main
 
 import (
-	"get-item-json-service/internal"
+	"get-item-json-service/internal/handler"
 	"log"
 	"net/http"
 )
 
 func main() {
-	handler := internal.NewHandler(internal.EmployeeCSVFile)
+	handler := handler.NewHandler(handler.EmployeeCSVFile)
 
 	http.HandleFunc("/get-items", handler.GetEmployeesHandler)
 

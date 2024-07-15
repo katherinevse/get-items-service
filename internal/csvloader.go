@@ -2,6 +2,7 @@ package internal
 
 import (
 	"encoding/csv"
+	"get-item-json-service/internal/handler"
 	"get-item-json-service/model"
 	"io"
 	"log"
@@ -9,7 +10,7 @@ import (
 	"strconv"
 )
 
-func (h *Handler) LoadEmployeesFromCSV() ([]model.Employee, error) {
+func (h *handler.Handler) LoadEmployeesFromCSV() ([]model.Employee, error) {
 	file, err := os.Open(h.CSVFile)
 	if err != nil {
 		return nil, err

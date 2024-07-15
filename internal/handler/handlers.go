@@ -13,11 +13,11 @@ const (
 )
 
 type Handler struct {
-	CSVFile string
+	CsvManager CsvManager
 }
 
-func NewHandler(csvFile string) *Handler {
-	return &Handler{CSVFile: csvFile}
+func New(CsvManager CsvManager) *Handler {
+	return &Handler{CsvManager: CsvManager}
 }
 
 // GetEmployeesHandler GEt/get-items?id=?

@@ -9,14 +9,19 @@ import (
 	"strconv"
 )
 
+type CsvManager interface {
+	Open(name string) (*os.File, error)
+	NewReader(r io.Reader) *csv.Reader
+}
+
 func (h *Handler) LoadEmployeesFromCSV() ([]model.Employee, error) {
-	file, err := os.Open(h.CSVFile)
+	file, err := h.CsvManager.Open(EmployeeCSVFile)
 	if err != nil {
 		return nil, err
 	}
 	defer file.Close()
 
-	reader := csv.NewReader(file)
+	reader := h.CsvManager.NewReader(file)
 
 	var employees []model.Employee
 

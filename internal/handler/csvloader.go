@@ -14,7 +14,7 @@ type CsvManager interface {
 	NewReader(r io.Reader) *csv.Reader
 }
 
-func (h *Handler) LoadEmployeesFromCSV() ([]model.Employee, error) {
+func (h *Handler) LoadEmployeesFromCSV() (map[int]model.Employee, error) {
 	file, err := h.CsvManager.Open(EmployeeCSVFile)
 	if err != nil {
 		return nil, err
@@ -23,7 +23,7 @@ func (h *Handler) LoadEmployeesFromCSV() ([]model.Employee, error) {
 
 	reader := h.CsvManager.NewReader(file)
 
-	var employees []model.Employee
+	employees := make(map[int]model.Employee)
 
 	_, err = reader.Read()
 	if err != nil {
@@ -56,7 +56,7 @@ func (h *Handler) LoadEmployeesFromCSV() ([]model.Employee, error) {
 			Who:        row[5],
 		}
 
-		employees = append(employees, employee)
+		employees[id] = employee
 	}
 
 	return employees, nil

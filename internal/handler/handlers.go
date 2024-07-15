@@ -48,11 +48,8 @@ func (h *Handler) GetEmployeesHandler(w http.ResponseWriter, r *http.Request) {
 			continue
 		}
 
-		for _, emp := range employees {
-			if emp.ID == id {
-				employeeResults = append(employeeResults, emp)
-				break
-			}
+		if emp, exists := employees[id]; exists {
+			employeeResults = append(employeeResults, emp)
 		}
 	}
 
